@@ -13,17 +13,27 @@ const Statistics = ({ good, neutral, bad }) => {
 
   return (
     <>
-      <StatisticsLine text="good" value={good} />
-      <StatisticsLine text="neutral" value={neutral} />
-      <StatisticsLine text="bad" value={bad} />
-      <StatisticsLine text="all" value={total} />
-      <StatisticsLine text="average" value={average} />
-      <StatisticsLine text="positive" value={`${positive}%`} />
+      <table>
+        {/* Must add tbody tag in React when rendering a table */}
+        <tbody>
+          <StatisticsLine text="good" value={good} />
+          <StatisticsLine text="neutral" value={neutral} />
+          <StatisticsLine text="bad" value={bad} />
+          <StatisticsLine text="all" value={total} />
+          <StatisticsLine text="average" value={average} />
+          <StatisticsLine text="positive" value={`${positive}%`} />
+        </tbody>
+      </table>
     </>
   )
 }
 
-const StatisticsLine = ({ text, value }) => <div>{text} {value}</div>
+const StatisticsLine = ({ text, value }) => (
+  <tr>
+    <td>{text}</td>
+    <td>{value}</td>
+  </tr>
+)
 
 const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 
@@ -39,7 +49,7 @@ const App = () => {
         <Button text="neutral" onClick={() => setNeutral(neutral +1)} />
         <Button text="bad" onClick={() => setBad(bad +1)} />
       <h1>statistics</h1>
-        <Statistics good={good} neutral={neutral} bad={bad}></ Statistics>
+        <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
   )
 }
