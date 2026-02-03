@@ -1,13 +1,28 @@
 import { useState } from 'react'
 
+const Statistics = ({ good, neutral, bad }) => {
+  const total = good + neutral + bad
+  // If total is 0, set average to 0, otherwise make the calculation (prevents
+  // division with 0)
+  const average = total === 0 ? 0 : (good - bad) / total
+  const positive = total === 0 ? 0 : (good / total) * 100
+
+  return (
+    <>
+      <div>good {good}</div>
+      <div>neutral {neutral}</div>
+      <div>bad {bad}</div>
+      <div>all {total}</div>
+      <div>average {average}</div>
+      <div>positive {positive}</div>
+    </>
+  )
+}
+
 const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
-
-  const total = good + neutral + bad
-  const average = (good * 1 + neutral * 0 + bad * -1) / total
-  const positive = (good / total) * 100
 
   return (
     <div>
@@ -16,12 +31,7 @@ const App = () => {
         <button onClick={() => setNeutral(neutral +1)}>neutral</button>
         <button onClick={() => setBad(bad +1)}>bad</button>
       <h1>statistics</h1>
-        <div>good {good}</div>
-        <div>neutral {neutral}</div>
-        <div>bad {bad}</div>
-        <div>total {total}</div>
-        <div>average {average}</div>
-        <div>positive {positive} %</div>
+        <Statistics good={good} neutral={neutral} bad={bad}></ Statistics>
     </div>
   )
 }
