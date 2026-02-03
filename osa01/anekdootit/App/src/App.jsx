@@ -13,8 +13,11 @@ const App = () => {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when dianosing patients.',
     'The only way to go fast, is to go well.'
   ]
-   
+  // Create an empty array filled with zeroes for the votes
+  const votesArray = new Array(8).fill(0)
+
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState(votesArray)
 
   // Math.floor converts Math.random value to a valid array index by rounding
   // it down
@@ -23,10 +26,18 @@ const App = () => {
     setSelected(random)
   }
 
+  const voteAnecdote = () => {
+    const copy = [...votes]
+    copy[selected] += 1
+    setVotes(copy)
+  }
+
   return (
     <div>
       <p>{anecdotes[selected]}</p>
-      <Button onClick={getRandomAnecdote}text="next anecdote" />
+      <p>has {votes[selected]} votes</p>
+      <Button onClick={getRandomAnecdote} text="next anecdote" />
+      <Button onClick={voteAnecdote} text="vote" />
     </div>
   )
 }
