@@ -32,12 +32,31 @@ const App = () => {
     setVotes(copy)
   }
 
+  // Loop through the votes to find the highest number
+  let mostVotes = 0
+  let mostVotesIndex = 0
+
+  for(let i = 0; i < votes.length; i++) {
+    if (votes[i] > mostVotes) {
+      mostVotes = votes[i]
+      mostVotesIndex = i
+    }
+  }
+
   return (
     <div>
-      <p>{anecdotes[selected]}</p>
-      <p>has {votes[selected]} votes</p>
-      <Button onClick={getRandomAnecdote} text="next anecdote" />
-      <Button onClick={voteAnecdote} text="vote" />
+      <h1>Anecdote of the day</h1>
+        <p>{anecdotes[selected]}</p>
+        <p>has {votes[selected]} votes</p>
+        <Button onClick={getRandomAnecdote} text="next anecdote" />
+        <Button onClick={voteAnecdote} text="vote" />
+      {mostVotes > 0 && (
+        <>
+          <h1>Anecdote with most votes</h1>
+            <p>{anecdotes[mostVotesIndex]}</p>
+            <p>has {votes[mostVotesIndex]} votes</p>
+        </>
+      )}
     </div>
   )
 }
