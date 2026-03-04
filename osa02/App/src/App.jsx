@@ -63,10 +63,9 @@ const Part = (props) => {
 }
 
 const Total = ({ parts }) => {
-  let total = 0
-  parts.forEach(part => {
-    total += part.exercises
-  })
+  const total = parts.reduce(
+    (sum, parts) => sum + parts.exercises, 0
+  )
 
   return (
     <div>
