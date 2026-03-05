@@ -9,6 +9,11 @@ const App = () => {
   // Handles adding a new name to the array
   const addName = (e) => {
     e.preventDefault()
+    // Check if the name exists already
+    if (persons.some((person) => person.name === newName)) {
+      alert(`${newName} is already added to phonebook`)
+      return
+    }
     const personObject = {
       name: newName
     }
